@@ -1,0 +1,27 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import linear_model
+
+dh =pd.read_csv('home.csv')
+dh.head()
+
+%matplotlib inline
+plt.xlabel('area(sqr ft)')
+plt.ylabel('price(US$)')
+plt.scatter(dh.area, dh.price, color='red', marker='+')
+##model linear regression = y =mx+b
+reg = linear_model.LinearRegression()
+reg.fit(dh[['area']], dh.price)
+
+##reg.coef is m
+reg.coef_
+##reg.coef is b
+reg.intercept_
+##we will predict area = 3300
+reg.predict(3300)
+%matplotlib inline
+plt.xlabel('area', fontsize = 20)
+plt.ylabel('price', fontsize =20)
+plt.scatter(dh.area, dh.price, color='red', marker='+')
+plt.plot(dh.area, reg.predict(dh[['area']],), color ='blue')
